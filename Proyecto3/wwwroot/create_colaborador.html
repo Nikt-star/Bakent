@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crear Colaborador - Proyecto3</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="card-title">Crear Colaborador</h2>
+            <p class="text-muted">Rellena el formulario y env&iacute;a para crear un colaborador con habilidades y certificaciones.</p>
+
+            <form id="colForm" class="mb-3">
+              <div class="mb-3">
+                <label class="form-label">Nombre completo</label>
+                <input name="nombreCompleto" class="form-control" required />
+              </div>
+              <div class="mb-3 row">
+                <div class="col">
+                  <label class="form-label">Rol actual</label>
+                  <input name="rolActual" class="form-control" required />
+                </div>
+                <div class="col">
+                  <label class="form-label">Cuenta proyecto</label>
+                  <input name="cuentaProyecto" class="form-control" required />
+                </div>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="disp" name="disponibilidadMovilidad">
+                <label class="form-check-label" for="disp">Disponibilidad movilidad</label>
+              </div>
+
+              <h5>Habilidades</h5>
+              <div id="skills"></div>
+              <button type="button" class="btn btn-outline-primary btn-sm mb-3" onclick="addSkillRow()">Agregar habilidad</button>
+
+              <h5>Certificaciones</h5>
+              <div id="certs"></div>
+              <button type="button" class="btn btn-outline-primary btn-sm mb-3" onclick="addCertRow()">Agregar certificaci&oacute;n</button>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Crear Colaborador</button>
+                <a href="/" class="btn btn-secondary">Volver</a>
+              </div>
+            </form>
+
+            <div id="alertPlaceholder"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="skillTemplate">
+    <div class="card mb-2 p-2 skill-row">
+      <div class="row">
+        <div class="col-md-5 mb-2">
+          <input name="skillNombre" class="form-control" placeholder="Nombre (ej: C#)" />
+        </div>
+        <div class="col-md-3 mb-2">
+          <input name="skillID" class="form-control" placeholder="ID (opcional)" />
+        </div>
+        <div class="col-md-4 mb-2">
+          <select name="nivelDominio" class="form-select">
+            <option>B&aacute;sico</option>
+            <option>Intermedio</option>
+            <option>Avanzado</option>
+            <option>Experto</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end"><button type="button" class="btn btn-sm btn-link text-danger" onclick="this.closest('.skill-row').remove()">Eliminar</button></div>
+    </div>
+  </template>
+
+  <template id="certTemplate">
+    <div class="card mb-2 p-2 cert-row">
+      <div class="row">
+        <div class="col-md-6 mb-2"><input name="nombreCertificacion" class="form-control" placeholder="Nombre certificaci&oacute;n" /></div>
+        <div class="col-md-3 mb-2"><input name="fechaObtencion" type="date" class="form-control" /></div>
+        <div class="col-md-3 mb-2"><input name="institucion" class="form-control" placeholder="Instituci&oacute;n" /></div>
+      </div>
+      <div class="d-flex justify-content-end"><button type="button" class="btn btn-sm btn-link text-danger" onclick="this.closest('.cert-row').remove()">Eliminar</button></div>
+    </div>
+  </template>
+
+  <script>
+    function addSkillRow() {
+      const tpl = document.getElementById('skillTemplate');
+      document.getElementById('skills').appendChild(tpl.content.cloneNode(true));
+    }
+    function addCertRow() {
+      const tpl = document.getElementById('certTemplate');
+      document.getElementById('certs').appendChild(tpl.content.cloneNode(true));
+    }
+
+    function showAlert(type, message) {
+      const holder = document.getElementById('alertPlaceholder');
+      holder.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert">${message}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>`;
+    }
+
+    document.getElementById('colForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        nombreCompleto: form.nombreCompleto.value,
+        rolActual: form.rolActual.value,
+        cuentaProyecto: form.cuentaProyecto.value,
+        disponibilidadMovilidad: form.disponibilidadMovilidad.checked,
+        habilidades: [],
+        certificaciones: []
+      };
+
+      // gather skills
+      const skillContainers = document.getElementById('skills').querySelectorAll('.skill-row');
+      for (let c of skillContainers) {
+        const nombre = c.querySelector('input[name="skillNombre"]').value;
+        const idVal = c.querySelector('input[name="skillID"]').value;
+        const nivel = c.querySelector('select[name="nivelDominio"]').value;
+        if (!nombre && !idVal) continue;
+        data.habilidades.push({ skillID: idVal ? parseInt(idVal) : null, skillNombre: nombre || null, nivelDominio: nivel || 'Básico' });
+      }
+
+      // gather certs
+      const certContainers = document.getElementById('certs').querySelectorAll('.cert-row');
+      for (let c of certContainers) {
+        const nombre = c.querySelector('input[name="nombreCertificacion"]').value;
+        const fecha = c.querySelector('input[name="fechaObtencion"]').value;
+        const inst = c.querySelector('input[name="institucion"]').value;
+        if (!nombre) continue;
+        data.certificaciones.push({ nombreCertificacion: nombre, fechaObtencion: fecha ? (new Date(fecha)).toISOString() : null, institucion: inst });
+      }
+
+      try {
+        const res = await fetch('/api/Colaborador', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          const json = await res.json();
+          showAlert('success', `Colaborador creado (ID: ${json.colaboradorID}).`);
+          form.reset();
+          document.getElementById('skills').innerHTML = '';
+          document.getElementById('certs').innerHTML = '';
+        } else {
+          const txt = await res.text();
+          showAlert('danger', `Error (${res.status}): ${txt}`);
+        }
+      } catch (err) {
+        showAlert('danger', 'Error de red: ' + err.toString());
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
