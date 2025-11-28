@@ -1,4 +1,4 @@
-# ?? SISTEMA DE GESTIÓN DE TALENTO INTERNO - PROYECTO COMPLETADO
+#  SISTEMA DE GESTIÓN DE TALENTO INTERNO - PROYECTO COMPLETADO
 
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen)
@@ -7,24 +7,24 @@
 
 ---
 
-## ?? Descripción del Proyecto
+## Descripción del Proyecto
 
 Sistema completo de gestión de talento interno en **ASP.NET Core 9** que facilita:
 
-? **Gestión de Perfiles** - Crear y editar perfiles de colaboradores  
-? **Gestión de Vacantes** - Publicar y administrar vacantes  
-? **Candidaturas** - Aplicar a vacantes y mostrar interés  
-? **Pipeline de Selección** - Gestionar estados de candidatos  
-? **Gamificación** - Sistema de puntos y logros  
-? **Desarrollo Profesional** - Cursos y seguimiento de progreso  
-? **Gestión de Skills** - Inventario y análisis de brechas  
-? **Beneficios** - Catálogo de beneficios empresariales  
-? **Notificaciones** - Sistema integrado de notificaciones  
-? **Reportes** - Análisis avanzado de datos  
+ **Gestión de Perfiles** - Crear y editar perfiles de colaboradores  
+ **Gestión de Vacantes** - Publicar y administrar vacantes  
+ **Candidaturas** - Aplicar a vacantes y mostrar interés  
+ **Pipeline de Selección** - Gestionar estados de candidatos  
+ **Gamificación** - Sistema de puntos y logros  
+ **Desarrollo Profesional** - Cursos y seguimiento de progreso  
+ **Gestión de Skills** - Inventario y análisis de brechas  
+ **Beneficios** - Catálogo de beneficios empresariales  
+ **Notificaciones** - Sistema integrado de notificaciones  
+ **Reportes** - Análisis avanzado de datos  
 
 ---
 
-## ?? Inicio Rápido
+##  Inicio Rápido
 
 ```bash
 # 1. Clonar proyecto
@@ -46,88 +46,88 @@ https://localhost:5001/swagger
 
 ---
 
-## ?? Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```
 Proyecto3/
-??? Controllers/              # 9 controladores (7 nuevos, 2 mejorados)
-?   ??? PerfilController.cs
-?   ??? VacanteController.cs
-?   ??? BeneficiosController.cs
-?   ??? NotificacionesController.cs
-?   ??? GamificacionController.cs
-?   ??? DesarrolloController.cs
-?   ??? PipelineController.cs
-?   ??? RRHHController.cs
-?   ??? ReporteController.cs
-??? Program.cs               # Configuración mejorada
-??? appsettings.json
-??? wwwroot/
+ Controllers/              # 9 controladores (7 nuevos, 2 mejorados)
+ PerfilController.cs
+ VacanteController.cs
+BeneficiosController.cs
+ NotificacionesController.cs
+ GamificacionController.cs
+ DesarrolloController.cs
+ PipelineController.cs
+ RRHHController.cs
+ ReporteController.cs
+ Program.cs               # Configuración mejorada
+ appsettings.json
+ wwwroot/
 
 Proyecto3.Core/
-??? Entities/               # 7 entidades nuevas
-??? Models/
-?   ??? Dtos.cs            # 15+ DTOs nuevos
-??? Interfaces/
+ Entities/               # 7 entidades nuevas
+ Models/
+Dtos.cs            # 15+ DTOs nuevos
+Interfaces/
 
 Proyecto3.Infrastructure/
-??? Data/
-?   ??? TalentoInternoDbContext.cs
-??? Repositories/
-??? Services/
-??? Migrations/
+Data/
+TalentoInternoDbContext.cs
+Repositories/
+ Services/
+ Migrations/
 ```
 
 ---
 
-## ?? Funcionalidades Principales
+##  Funcionalidades Principales
 
-### 1. **Perfil de Colaborador** ??
+### 1. **Perfil de Colaborador** 
 - Crear perfil personal
 - Completar información
 - Recibir puntos por perfil completo
 
-### 2. **Vacantes y Aplicaciones** ??
+### 2. **Vacantes y Aplicaciones** 
 - Listar vacantes activas
 - Aplicar a vacantes
 - Mostrar interés
 - Seguimiento de aplicaciones
 
-### 3. **Pipeline de Selección** ??
+### 3. **Pipeline de Selección** 
 - Ver candidatos por vacante
 - Cambiar estado de candidato
 - Agregar notas y evaluaciones
 - Resumen del pipeline
 
-### 4. **Gamificación** ??
+### 4. **Gamificación** 
 - Acumular puntos
 - Validar certificaciones
 - Completar cursos
 - Leaderboard global
 
-### 5. **Desarrollo Profesional** ??
+### 5. **Desarrollo Profesional** 
 - Catálogo de cursos
 - Iniciar cursos
 - Seguimiento de progreso
 - Estadísticas de aprendizaje
 
-### 6. **Gestión de Skills** ??
+### 6. **Gestión de Skills** 
 - Inventario de skills
 - Análisis por área/rol/nivel
 - Reporte de brechas
 - Alertas críticas
 - Exportación en CSV
 
-### 7. **Notificaciones** ??
+### 7. **Notificaciones** 
 - Notificaciones en tiempo real
 - Marcar como leída
 - Filtrar por tipo
 
-### 8. **Beneficios** ??
+### 8. **Beneficios** 
 - Catálogo de beneficios
 - Filtrado por categoría
 
-### 9. **RR.HH.** ??
+### 9. **RR.HH.** 
 - Registrar certificaciones
 - Gestionar habilidades
 - Suspender/banear usuarios
@@ -135,7 +135,7 @@ Proyecto3.Infrastructure/
 
 ---
 
-## ?? API Endpoints
+## API Endpoints
 
 ### Perfiles
 - `POST /api/perfil` - Crear perfil
@@ -165,32 +165,32 @@ Proyecto3.Infrastructure/
 - `GET /api/reporte/alertas` - Alertas críticas
 - `GET /api/reporte/dashboard` - Dashboard
 
-**[Ver todos los endpoints ?](POSTMAN_REQUESTS.md)**
+**[Ver todos los endpoints ](POSTMAN_REQUESTS.md)**
 
 ---
 
-## ??? Entidades del Modelo
+##  Entidades del Modelo
 
 ```
 Colaborador
-??? Perfil
-??? HabilidadColaborador
-??? Certificacion
-??? Vacante_Aplicacion
-??? Notificacion
-??? Punto
-??? Progreso_Curso
+Perfil
+HabilidadColaborador
+Certificacion
+Vacante_Aplicacion
+Notificacion
+Punto
+Progreso_Curso
 
 PerfilesVacante
-??? RequisitoVacante
-??? Vacante_Aplicacion
+ RequisitoVacante
+Vacante_Aplicacion
 
 Skill
-??? HabilidadColaborador
-??? RequisitoVacante
+HabilidadColaborador
+RequisitoVacante
 
 Curso
-??? Progreso_Curso
+?Progreso_Curso
 
 Beneficio (Independiente)
 Notificacion (Independiente)
@@ -198,7 +198,7 @@ Notificacion (Independiente)
 
 ---
 
-## ?? Seguridad
+## Seguridad
 
 ? Validación de entidades  
 ? Manejo de errores  
@@ -208,7 +208,7 @@ Notificacion (Independiente)
 
 ---
 
-## ?? Base de Datos
+## Base de Datos
 
 **Motor:** SQL Server  
 **Version:** .NET 9 compatible  
@@ -227,7 +227,7 @@ dotnet ef migrations add MigrationName
 
 ---
 
-## ?? Estadísticas
+##  Estadísticas
 
 | Métrica | Valor |
 |---------|-------|
@@ -240,7 +240,7 @@ dotnet ef migrations add MigrationName
 
 ---
 
-## ?? Documentación
+##  Documentación
 
 - **[RESUMEN_IMPLEMENTACION.md](RESUMEN_IMPLEMENTACION.md)** - Detalle completo de funcionalidades
 - **[GUIA_EJECUCION.md](GUIA_EJECUCION.md)** - Cómo ejecutar el proyecto
@@ -250,28 +250,28 @@ dotnet ef migrations add MigrationName
 
 ---
 
-## ?? Flujo de Trabajo Típico
+##  Flujo de Trabajo Típico
 
 ```
 1. Colaborador crea/completa perfil ? +100 puntos
-   ?
+   
 2. Colaborador ve vacantes disponibles
-   ?
+   
 3. Aplica a vacante de interés
-   ?
+   
 4. RR.HH. revisa candidatos en pipeline
-   ?
+
 5. Cambia estado a "En_Evaluacion"
-   ?
+   
 6. RR.HH. toma decisión ? "Seleccionado" o "Rechazado"
-   ?
+   
 7. Notificación automática al colaborador
-   ?
-8. Colaborador inicia cursos de desarrollo ? +75 puntos
-   ?
-9. Completa certificación ? +50 puntos
-   ?
-10. Sube en leaderboard ??
+   
+8. Colaborador inicia cursos de desarrollo  +75 puntos
+   
+9. Completa certificación  +50 puntos
+   
+10. Sube en leaderboard 
 ```
 
 ---
@@ -289,32 +289,32 @@ dotnet ef migrations add MigrationName
 
 ---
 
-## ?? Requisitos
+##  Requisitos
 
-- ? .NET 9 SDK
-- ? SQL Server 2019+
-- ? Visual Studio 2022 o VS Code
-- ? Git
+-  .NET 9 SDK
+-  SQL Server 2019+
+-  Visual Studio 2022 o VS Code
+-  Git
 
 ---
 
-## ?? Estado del Proyecto
+##  Estado del Proyecto
 
 | Característica | Estado |
 |---|---|
-| Controladores | ? Completo |
-| Entidades | ? Completo |
-| DTOs | ? Completo |
-| Endpoints | ? Completo |
-| Migraciones | ? Completo |
-| Validaciones | ? Parcial |
-| Autenticación | ? Parcial |
-| Tests | ? No iniciado |
-| Documentación | ? Completo |
+| Controladores |  Completo |
+| Entidades |  Completo |
+| DTOs |  Completo |
+| Endpoints |  Completo |
+| Migraciones |  Completo |
+| Validaciones |  Parcial |
+| Autenticación |  Parcial |
+| Tests |  No iniciado |
+| Documentación |  Completo |
 
 ---
 
-## ?? Contribuciones
+##  Contribuciones
 
 Para contribuir:
 
@@ -326,21 +326,17 @@ Para contribuir:
 
 ---
 
-## ?? Contacto
 
-**Email:** support@ejemplo.com  
-**Repositorio:** https://github.com/Nikt-star/Bakent  
-**Issues:** https://github.com/Nikt-star/Bakent/issues
 
 ---
 
-## ?? Licencia
+##  Licencia
 
 Este proyecto está bajo licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-## ?? Agradecimientos
+##  Agradecimientos
 
 - Microsoft por .NET 9
 - Entity Framework Core team
@@ -348,27 +344,27 @@ Este proyecto está bajo licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-## ? Características Destacadas
+##  Características Destacadas
 
-?? **80+ Endpoints REST** - API completa y robusta  
-?? **Análisis de Datos** - Reportes y dashboards  
-?? **Gamificación** - Sistema de puntos y logros  
-?? **Responsive** - Accesible desde cualquier dispositivo  
-?? **Seguro** - Validaciones en todos los niveles  
-?? **Documentado** - Código limpio y bien comentado  
-
----
-
-## ?? Performance
-
-- ? Queries optimizadas con EF Core
-- ?? Lazy loading y eager loading estratégico
-- ?? Potencial para caching con Redis
-- ?? Índices en base de datos
+ **80+ Endpoints REST** - API completa y robusta  
+ **Análisis de Datos** - Reportes y dashboards  
+ **Gamificación** - Sistema de puntos y logros  
+ **Responsive** - Accesible desde cualquier dispositivo  
+ **Seguro** - Validaciones en todos los niveles  
+ **Documentado** - Código limpio y bien comentado  
 
 ---
 
-## ?? Bug Reporting
+##  Performance
+
+-  Queries optimizadas con EF Core
+-  Lazy loading y eager loading estratégico
+-  Potencial para caching con Redis
+-  Índices en base de datos
+
+---
+
+## Bug Reporting
 
 Si encuentras un bug:
 
