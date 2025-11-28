@@ -1,4 +1,4 @@
-# ?? SISTEMA DE GESTI”N DE TALENTO INTERNO - PROYECTO COMPLETADO
+# ?? SISTEMA DE GESTI√ìN DE TALENTO INTERNO - PROYECTO COMPLETADO
 
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen)
@@ -7,24 +7,24 @@
 
 ---
 
-## ?? DescripciÛn del Proyecto
+## ?? Descripci√≥n del Proyecto
 
-Sistema completo de gestiÛn de talento interno en **ASP.NET Core 9** que facilita:
+Sistema completo de gesti√≥n de talento interno en **ASP.NET Core 9** que facilita:
 
-? **GestiÛn de Perfiles** - Crear y editar perfiles de colaboradores  
-? **GestiÛn de Vacantes** - Publicar y administrar vacantes  
-? **Candidaturas** - Aplicar a vacantes y mostrar interÈs  
-? **Pipeline de SelecciÛn** - Gestionar estados de candidatos  
-? **GamificaciÛn** - Sistema de puntos y logros  
+? **Gesti√≥n de Perfiles** - Crear y editar perfiles de colaboradores  
+? **Gesti√≥n de Vacantes** - Publicar y administrar vacantes  
+? **Candidaturas** - Aplicar a vacantes y mostrar inter√©s  
+? **Pipeline de Selecci√≥n** - Gestionar estados de candidatos  
+? **Gamificaci√≥n** - Sistema de puntos y logros  
 ? **Desarrollo Profesional** - Cursos y seguimiento de progreso  
-? **GestiÛn de Skills** - Inventario y an·lisis de brechas  
-? **Beneficios** - Cat·logo de beneficios empresariales  
+? **Gesti√≥n de Skills** - Inventario y an√°lisis de brechas  
+? **Beneficios** - Cat√°logo de beneficios empresariales  
 ? **Notificaciones** - Sistema integrado de notificaciones  
-? **Reportes** - An·lisis avanzado de datos  
+? **Reportes** - An√°lisis avanzado de datos  
 
 ---
 
-## ?? Inicio R·pido
+## ?? Inicio R√°pido
 
 ```bash
 # 1. Clonar proyecto
@@ -60,7 +60,7 @@ Proyecto3/
 ?   ??? PipelineController.cs
 ?   ??? RRHHController.cs
 ?   ??? ReporteController.cs
-??? Program.cs               # ConfiguraciÛn mejorada
+??? Program.cs               # Configuraci√≥n mejorada
 ??? appsettings.json
 ??? wwwroot/
 
@@ -84,48 +84,48 @@ Proyecto3.Infrastructure/
 
 ### 1. **Perfil de Colaborador** ??
 - Crear perfil personal
-- Completar informaciÛn
+- Completar informaci√≥n
 - Recibir puntos por perfil completo
 
 ### 2. **Vacantes y Aplicaciones** ??
 - Listar vacantes activas
 - Aplicar a vacantes
-- Mostrar interÈs
+- Mostrar inter√©s
 - Seguimiento de aplicaciones
 
-### 3. **Pipeline de SelecciÛn** ??
+### 3. **Pipeline de Selecci√≥n** ??
 - Ver candidatos por vacante
 - Cambiar estado de candidato
 - Agregar notas y evaluaciones
 - Resumen del pipeline
 
-### 4. **GamificaciÛn** ??
+### 4. **Gamificaci√≥n** ??
 - Acumular puntos
 - Validar certificaciones
 - Completar cursos
 - Leaderboard global
 
 ### 5. **Desarrollo Profesional** ??
-- Cat·logo de cursos
+- Cat√°logo de cursos
 - Iniciar cursos
 - Seguimiento de progreso
-- EstadÌsticas de aprendizaje
+- Estad√≠sticas de aprendizaje
 
-### 6. **GestiÛn de Skills** ??
+### 6. **Gesti√≥n de Skills** ??
 - Inventario de skills
-- An·lisis por ·rea/rol/nivel
+- An√°lisis por √°rea/rol/nivel
 - Reporte de brechas
-- Alertas crÌticas
-- ExportaciÛn en CSV
+- Alertas cr√≠ticas
+- Exportaci√≥n en CSV
 
 ### 7. **Notificaciones** ??
 - Notificaciones en tiempo real
-- Marcar como leÌda
+- Marcar como le√≠da
 - Filtrar por tipo
 
 ### 8. **Beneficios** ??
-- Cat·logo de beneficios
-- Filtrado por categorÌa
+- Cat√°logo de beneficios
+- Filtrado por categor√≠a
 
 ### 9. **RR.HH.** ??
 - Registrar certificaciones
@@ -151,7 +151,7 @@ Proyecto3.Infrastructure/
 - `GET /api/pipeline/vacante/{vacanteId}` - Ver candidatos
 - `PUT /api/pipeline/{id}/estado` - Cambiar estado
 
-### GamificaciÛn
+### Gamificaci√≥n
 - `GET /api/gamificacion/puntos/{id}` - Ver puntos
 - `GET /api/gamificacion/historial/{id}` - Ver historial
 
@@ -162,7 +162,7 @@ Proyecto3.Infrastructure/
 
 ### Reportes
 - `GET /api/reporte/brechas` - Reporte de brechas
-- `GET /api/reporte/alertas` - Alertas crÌticas
+- `GET /api/reporte/alertas` - Alertas cr√≠ticas
 - `GET /api/reporte/dashboard` - Dashboard
 
 **[Ver todos los endpoints ?](POSTMAN_REQUESTS.md)**
@@ -200,7 +200,7 @@ Notificacion (Independiente)
 
 ## ?? Seguridad
 
-? ValidaciÛn de entidades  
+? Validaci√≥n de entidades  
 ? Manejo de errores  
 ? JWT Bearer (por implementar)  
 ? CORS configurado  
@@ -221,64 +221,64 @@ dotnet ef database update
 # Revertir cambios
 dotnet ef database update 0
 
-# Crear migraciÛn
+# Crear migraci√≥n
 dotnet ef migrations add MigrationName
 ```
 
 ---
 
-## ?? EstadÌsticas
+## ?? Estad√≠sticas
 
-| MÈtrica | Valor |
+| M√©trica | Valor |
 |---------|-------|
 | **Controladores** | 9 |
 | **Endpoints** | 80+ |
 | **Entidades** | 13 |
 | **DTOs** | 15+ |
 | **Casos de Uso** | 18/18 ? |
-| **LÌneas de CÛdigo** | 3000+ |
+| **L√≠neas de C√≥digo** | 3000+ |
 
 ---
 
-## ?? DocumentaciÛn
+## ?? Documentaci√≥n
 
 - **[RESUMEN_IMPLEMENTACION.md](RESUMEN_IMPLEMENTACION.md)** - Detalle completo de funcionalidades
-- **[GUIA_EJECUCION.md](GUIA_EJECUCION.md)** - CÛmo ejecutar el proyecto
+- **[GUIA_EJECUCION.md](GUIA_EJECUCION.md)** - C√≥mo ejecutar el proyecto
 - **[POSTMAN_REQUESTS.md](POSTMAN_REQUESTS.md)** - Ejemplos de requests
-- **[MIGRACIONES_GUIA.md](MIGRACIONES_GUIA.md)** - GestiÛn de migraciones
-- **[MEJORAS_FUTURAS.md](MEJORAS_FUTURAS.md)** - PrÛximas caracterÌsticas
+- **[MIGRACIONES_GUIA.md](MIGRACIONES_GUIA.md)** - Gesti√≥n de migraciones
+- **[MEJORAS_FUTURAS.md](MEJORAS_FUTURAS.md)** - Pr√≥ximas caracter√≠sticas
 
 ---
 
-## ?? Flujo de Trabajo TÌpico
+## ?? Flujo de Trabajo T√≠pico
 
 ```
 1. Colaborador crea/completa perfil ? +100 puntos
    ?
 2. Colaborador ve vacantes disponibles
    ?
-3. Aplica a vacante de interÈs
+3. Aplica a vacante de inter√©s
    ?
 4. RR.HH. revisa candidatos en pipeline
    ?
 5. Cambia estado a "En_Evaluacion"
    ?
-6. RR.HH. toma decisiÛn ? "Seleccionado" o "Rechazado"
+6. RR.HH. toma decisi√≥n ? "Seleccionado" o "Rechazado"
    ?
-7. NotificaciÛn autom·tica al colaborador
+7. Notificaci√≥n autom√°tica al colaborador
    ?
 8. Colaborador inicia cursos de desarrollo ? +75 puntos
    ?
-9. Completa certificaciÛn ? +50 puntos
+9. Completa certificaci√≥n ? +50 puntos
    ?
 10. Sube en leaderboard ??
 ```
 
 ---
 
-## ??? TecnologÌas Utilizadas
+## ??? Tecnolog√≠as Utilizadas
 
-| TecnologÌa | VersiÛn | PropÛsito |
+| Tecnolog√≠a | Versi√≥n | Prop√≥sito |
 |-----------|---------|----------|
 | .NET | 9.0 | Framework principal |
 | C# | 13.0 | Lenguaje |
@@ -300,7 +300,7 @@ dotnet ef migrations add MigrationName
 
 ## ?? Estado del Proyecto
 
-| CaracterÌstica | Estado |
+| Caracter√≠stica | Estado |
 |---|---|
 | Controladores | ? Completo |
 | Entidades | ? Completo |
@@ -308,9 +308,9 @@ dotnet ef migrations add MigrationName
 | Endpoints | ? Completo |
 | Migraciones | ? Completo |
 | Validaciones | ? Parcial |
-| AutenticaciÛn | ? Parcial |
+| Autenticaci√≥n | ? Parcial |
 | Tests | ? No iniciado |
-| DocumentaciÛn | ? Completo |
+| Documentaci√≥n | ? Completo |
 
 ---
 
@@ -336,7 +336,7 @@ Para contribuir:
 
 ## ?? Licencia
 
-Este proyecto est· bajo licencia MIT. Ver `LICENSE` para m·s detalles.
+Este proyecto est√° bajo licencia MIT. Ver `LICENSE` para m√°s detalles.
 
 ---
 
@@ -348,23 +348,23 @@ Este proyecto est· bajo licencia MIT. Ver `LICENSE` para m·s detalles.
 
 ---
 
-## ? CaracterÌsticas Destacadas
+## ? Caracter√≠sticas Destacadas
 
 ?? **80+ Endpoints REST** - API completa y robusta  
-?? **An·lisis de Datos** - Reportes y dashboards  
-?? **GamificaciÛn** - Sistema de puntos y logros  
+?? **An√°lisis de Datos** - Reportes y dashboards  
+?? **Gamificaci√≥n** - Sistema de puntos y logros  
 ?? **Responsive** - Accesible desde cualquier dispositivo  
 ?? **Seguro** - Validaciones en todos los niveles  
-?? **Documentado** - CÛdigo limpio y bien comentado  
+?? **Documentado** - C√≥digo limpio y bien comentado  
 
 ---
 
 ## ?? Performance
 
 - ? Queries optimizadas con EF Core
-- ?? Lazy loading y eager loading estratÈgico
+- ?? Lazy loading y eager loading estrat√©gico
 - ?? Potencial para caching con Redis
-- ?? Õndices en base de datos
+- ?? √çndices en base de datos
 
 ---
 
@@ -379,7 +379,5 @@ Si encuentras un bug:
 
 ---
 
-**°Gracias por usar nuestro sistema! ??**
 
-*⁄ltima actualizaciÛn: Enero 2024*
-*VersiÛn: 1.0.0*
+
