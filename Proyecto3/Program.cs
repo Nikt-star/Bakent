@@ -1,21 +1,22 @@
-﻿// Program.cs (Proyecto3/Program.cs)
+// Program.cs (Proyecto3/Program.cs)
 
-using Microsoft.EntityFrameworkCore; // Necesario para UseSqlServer
+using Microsoft.EntityFrameworkCore;
 using Proyecto3.Core.Interfaces;
 using Proyecto3.Infrastructure.Data;
 using Proyecto3.Infrastructure.Repositories;
 using Proyecto3.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer; // Necesario para JWT
-using Microsoft.IdentityModel.Tokens; // Necesario para JWT
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Proyecto3.Core.Models; // Asumiendo que JwtSettings está aquí
-using Proyecto3.Infrastructure.Seed; // Seeder
+using Proyecto3.Core.Models;
+using Proyecto3.Infrastructure.Seed;
 using System.Text.Json.Serialization;
+using System.Threading;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // -----------------------------------------------------------
-// 📌 SECCIÓN DE REGISTRO DE SERVICIOS (ANTES de builder.Build())
+// ?? SECCI�N DE REGISTRO DE SERVICIOS
 // -----------------------------------------------------------
 
 // 1. DB CONTEXT
@@ -26,19 +27,38 @@ builder.Services.AddDbContext<TalentoInternoDbContext>(options =>
 builder.Services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
 builder.Services.AddScoped<IVacanteRepository, VacanteRepository>();
 
-// 3. REGISTRO DE SERVICIOS (Lógica de Negocio y Matching)
+// 3. REGISTRO DE SERVICIOS
 builder.Services.AddScoped<IColaboradorService, ColaboradorService>();
 builder.Services.AddScoped<IMatchingService, MatchingService>();
 
-// 4. API EXTERNA (Eleazar) - Integración con HttpClientFactory
+// 4. HTTP CLIENT FACTORY
 builder.Services.AddHttpClient<IExternalApiService, ExternalApiService>(client =>
 {
-    // Puedes configurar la URL base si fuera una API real
-    // client.BaseAddress = new Uri("https://api-externa-hr.com/"); 
+    // client.BaseAddress = new Uri("https://api-externa-hr.com/");
 });
 
-// 5. SEGURIDAD JWT (Eleazar) - Autenticación
-// Asegúrate de tener la sección "JwtSettings" en appsettings.json
+// 5. CORS - PARA CONECTAR CON FRONTEND (Quasar)
+// Leer m�ltiples or�genes desde appsettings.json: Frontend:AllowedOrigins
+var allowedOrigins = builder.Configuration.GetSection("Frontend:AllowedOrigins").Get<string[]>();
+if (allowedOrigins == null || allowedOrigins.Length == 0)
+{
+    // Fallback a la clave Frontend:Url (compatibilidad con configuraci�n anterior)
+    var frontendUrl = builder.Configuration["Frontend:Url"] ?? "http://localhost:8080";
+    allowedOrigins = new[] { frontendUrl };
+}
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
+// 6. SEGURIDAD JWT
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 
 builder.Services.AddAuthentication(options =>
@@ -61,42 +81,78 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Servicios de Framework: habilitar manejo de ciclos en JSON para evitar JsonException
+// 7. JSON SERIALIZATION
 builder.Services.AddControllers().AddJsonOptions(opts =>
 {
     opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
-builder.Services.AddOpenApi(); // Para Swagger/OpenAPI
+
+builder.Services.AddOpenApi();
 
 // -----------------------------------------------------------
-// 📌 CONSTRUIR Y CONFIGURAR PIPELINE (DESPUÉS de builder.Build())
+// ?? CONSTRUIR Y CONFIGURAR PIPELINE
 // -----------------------------------------------------------
 
 var app = builder.Build();
 
-// Seeder: aplicar migraciones y poblar datos de ejemplo
-using (var scope = app.Services.CreateScope())
+// CORS MIDDLEWARE - ACTIVAR ANTES DE AUTENTICACI�N
+app.UseCors("FrontendPolicy");
+
+// MIGRACIONES Y SEED
+var applyMigrations = app.Environment.IsDevelopment()
+                      || System.Environment.GetEnvironmentVariable("APPLY_MIGRATIONS") == "true";
+
+if (applyMigrations)
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<TalentoInternoDbContext>();
-    // Aplicar migraciones en inicio (útil en desarrollo)
-    context.Database.Migrate();
-    // Poblar datos si está vacío
-    await DataSeeder.SeedAsync(context);
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<TalentoInternoDbContext>();
+
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        try
+        {
+            var canConnect = await context.Database.CanConnectAsync(cts.Token);
+            if (!canConnect)
+            {
+                System.Console.WriteLine("?? No se pudo conectar a la base de datos.");
+            }
+            else
+            {
+                var pending = await context.Database.GetPendingMigrationsAsync(cts.Token);
+                if (pending != null && pending.Any())
+                {
+                    System.Console.WriteLine("? Aplicando migraciones pendientes...");
+                    await context.Database.MigrateAsync(cts.Token);
+                    System.Console.WriteLine("? Migraciones aplicadas.");
+                }
+
+                await DataSeeder.SeedAsync(context);
+                System.Console.WriteLine("? Seed ejecutado.");
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            System.Console.WriteLine("?? Timeout al conectar a la BD.");
+        }
+    }
+    catch (Exception ex)
+    {
+        System.Console.WriteLine($"? Error: {ex.Message}");
+    }
 }
 
-// Configure the HTTP request pipeline.
+// SWAGGER EN DESARROLLO
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-// Servir archivos estáticos desde wwwroot (formularios HTML)
+// STATIC FILES
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// 6. MIDDLEWARE DE SEGURIDAD
-// DEBE IR ANTES de app.UseAuthorization() y app.MapControllers()
+// MIDDLEWARE DE SEGURIDAD
 app.UseAuthentication();
 app.UseAuthorization();
 

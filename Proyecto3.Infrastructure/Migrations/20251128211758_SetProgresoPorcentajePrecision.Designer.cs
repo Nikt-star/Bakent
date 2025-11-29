@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto3.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Proyecto3.Infrastructure.Data;
 namespace Proyecto3.Infrastructure.Migrations
 {
     [DbContext(typeof(TalentoInternoDbContext))]
-    partial class TalentoInternoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251128211758_SetProgresoPorcentajePrecision")]
+    partial class SetProgresoPorcentajePrecision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
